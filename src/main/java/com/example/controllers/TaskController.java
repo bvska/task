@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
-
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
+
 
 
 @RestController
@@ -21,14 +21,11 @@ public class TaskController {
     private TaskServices service;
 
     @GetMapping("/{id}")
-    public Task getById(@PathVariable UUID id){
+    public Task getById(@PathVariable UUID id) {
         Optional<Task> optionalTask;
         try {
             optionalTask = service.getById(id);
-            if (optionalTask == null){
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "не найдено");
-            }
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
         return optionalTask.get();
@@ -36,13 +33,12 @@ public class TaskController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public UUID addCourse(@RequestBody Task task){
-        Task saved;
-            saved = service.add(task);
+    public UUID addTask(@RequestBody Task task) {
+        service.add(task);
+        task.setTime(LocalDateTime.now());
+        task.setStatus(Task.Status.RUNNING);
+        service.update(task);
+
         return task.getId();
     }
-
-
-
-
 }

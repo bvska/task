@@ -1,6 +1,10 @@
 package com.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.UUID;
 
@@ -11,17 +15,20 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-   // @Temporal(TemporalType.TIMESTAMP)
     @Column
     @org.hibernate.annotations.CreationTimestamp
-    private LocalTime time;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime time;
 
     @Enumerated(EnumType.STRING)
     @Column
     private Status status = Status.CREATED;
 
+    public LocalDateTime getTime() {
+        return time;
+    }
 
-    public void setTime(LocalTime time) {
+    public void setTime(LocalDateTime time) {
         this.time = time;
     }
 
@@ -33,9 +40,7 @@ public class Task {
         return id;
     }
 
-    public LocalTime getTime() {
-        return time;
-    }
+
 
     public Status getStatus() {
         return status;

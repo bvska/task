@@ -4,6 +4,7 @@ package com.example.services;
 
 
 import com.example.entity.Task;
+import com.example.exception.TaskException;
 import com.example.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -32,6 +33,7 @@ public class TaskServices {
 
     public Optional<Task> getById(UUID id) {
         Optional<Task> optionalTask = repository.findById(id);
+        if (optionalTask.isEmpty()) throw new TaskException("Запись не существует");
         return optionalTask;
     }
 
