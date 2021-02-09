@@ -7,9 +7,7 @@ import com.example.entity.Task;
 import com.example.exception.TaskException;
 import com.example.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 import java.util.UUID;
 
@@ -37,8 +35,8 @@ public class TaskServices {
         return optionalTask;
     }
 
+
     public void update(Task task){
         repository.save(task);
-
     }
 }
