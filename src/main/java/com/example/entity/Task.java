@@ -10,8 +10,8 @@ import java.util.UUID;
 @Entity
 public class Task {
     /**
-     * @param Id первичный ключ
-     * @param time - время создания/измененения задачи
+     * @param id первичный ключ
+     * @param timestamp - время создания/измененения задачи
      * @param status - состояние задачи
      **/
 
