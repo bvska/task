@@ -37,7 +37,10 @@ public class Task {
     }
 
     public void setTime(LocalDateTime time) {
+        if (!(time instanceof LocalDateTime))
+            throw new IllegalArgumentException ("объект не является датой");
         this.time = time;
+
     }
 
     public void setStatus(Status status) {
