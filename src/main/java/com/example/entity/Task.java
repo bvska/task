@@ -24,7 +24,7 @@ public class Task {
     @Column
     @org.hibernate.annotations.CreationTimestamp
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime time;
+    private LocalDateTime timestamp;
 
     @Enumerated(EnumType.STRING)
     @Column
@@ -32,14 +32,14 @@ public class Task {
 
 
 
-    public LocalDateTime getTime() {
-        return time;
+    public LocalDateTime getTimestamp() {
+        return timestamp;
     }
 
-    public void setTime(LocalDateTime time) {
-        if (!(time instanceof LocalDateTime))
+    public void setTimestamp(LocalDateTime timestamp) {
+        if (!(timestamp instanceof LocalDateTime))
             throw new IllegalArgumentException ("объект не является датой");
-        this.time = time;
+        this.timestamp = timestamp;
 
     }
 

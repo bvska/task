@@ -21,12 +21,12 @@ public class UpdateEntityStatus {
 
     @Async
     public void UpdateStatus(Task task){
-        task.setTime(LocalDateTime.now());
+        task.setTimestamp(LocalDateTime.now());
         task.setStatus(Task.Status.RUNNING);
         service.update(task);
         try {
             TimeUnit.MINUTES.sleep(2);
-                task.setTime(LocalDateTime.now());
+                task.setTimestamp(LocalDateTime.now());
                 task.setStatus(Task.Status.FINISHED);
                 service.update(task);
         } catch (InterruptedException e) {
