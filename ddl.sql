@@ -1,13 +1,14 @@
-create table task
-(
-    id        uuid not null
-        constraint task_pkey
-            primary key,
-    status    varchar(255),
-    timestamp timestamp
-);
+-- CREATE TABLE task
 
-comment on table task is 'test';
+    CREATE TABLE public.task
+    (
+        id uuid NOT NULL,
+        status character varying(255) COLLATE pg_catalog."default",
+        "timestamp" timestamp without time zone,
+        CONSTRAINT task_pkey PRIMARY KEY (id)
+    )
 
-alter table task
-    owner to postgres;
+    TABLESPACE pg_default;
+
+    ALTER TABLE public.task
+        OWNER to postgres;
